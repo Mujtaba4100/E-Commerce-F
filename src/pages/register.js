@@ -1,5 +1,5 @@
 // src/pages/register.js
-import { registerUser } from "../api/auth.js";
+import { registerUser } from "../../dist/assets/api/auth.js";
 process.env.
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
   e.preventDefault();

@@ -1,5 +1,5 @@
-import { fetchProducts } from "../api/products.js";
-import { addToCart } from "./cart.js";
+import { fetchProducts } from "../../dist/assets/api/products.js";
+import { addToCart } from "../../dist/assets/pages/cart.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);

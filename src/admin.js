@@ -1,5 +1,5 @@
-import './style.css';
-import { getToken ,getUserRole} from './api/auth.js';
+import '../dist/assets/style.css';
+import { getToken ,getUserRole} from '../dist/assets/api/auth.js';
 import {
   addProduct,
   fetchProducts,
@@ -8,7 +8,7 @@ import {
   fetchAllOrders,
   updateOrderStatus,
   fetchUsers,
-} from './api/api.js';
+} from '../dist/assets/api/api.js';
 
 
 const adminContent = document.getElementById('adminContent');

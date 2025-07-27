@@ -1,4 +1,4 @@
-import './style.css';
+import '../dist/assets/style.css';
 import { renderHomePage } from './pages/home.js';
 //import {renderOrdersPage} from './pages/order.js';
 

@@ -1,4 +1,5 @@
-import { loginUser } from "../api/auth.js";
+import { loginUser } from "../../dist/assets/api/auth.js";
+
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
