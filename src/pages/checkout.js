@@ -1,3 +1,5 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const buyNow = params.get("buyNow");
@@ -89,7 +91,7 @@ document.getElementById("place-order").addEventListener("click", async (e) => {
 };
 
   try {
-    const response = await fetch("http://localhost:5000/api/orders", {
+    const response = await fetch(`${backendURL}/api/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderData)

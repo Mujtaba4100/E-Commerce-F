@@ -2,10 +2,11 @@ import { fetchProducts } from "../api/products.js";
 import { createProductCard } from "../components/productCard.js";
 import { addToCart } from "../pages/cart.js";
 
-let allProducts = []; // ✅ Store all products for filtering
+let allProducts = []; // ✅ Store all products globally
 
 document.addEventListener("DOMContentLoaded", () => {
   renderHomePage();
+  setupGlobalEventDelegation(); // ✅ Attach single event listener for all buttons
 });
 
 async function renderHomePage() {
@@ -13,12 +14,10 @@ async function renderHomePage() {
     const products = await fetchProducts();
     allProducts = products;
 
-    renderFilterUI(); // ✅ Add filter dropdown
-    renderDefaultLayout(products); // ✅ Default 6-box layout
+    renderFilterUI();
+    renderDefaultLayout(products);
     renderHorizontalScroll(products);
-    attachCardEvents();
-
-    initFilters(); // ✅ Enable filter logic
+    initFilters();
   } catch (error) {
     console.error("Failed to render home page:", error);
   }
@@ -82,10 +81,9 @@ function renderDefaultLayout(products) {
   });
 
   grid.innerHTML = html;
-  attachCardEvents();
 }
 
-// ✅ Filtered layout (3 or 4 columns)
+// ✅ Filtered layout
 function renderFilteredProducts(products) {
   const grid = document.getElementById("product-grid");
   if (!grid) return;
@@ -100,8 +98,6 @@ function renderFilteredProducts(products) {
       ${products.map(createMiniProductCard).join("")}
     </div>
   `;
-
-  attachCardEvents();
 }
 
 // ✅ Initialize filter logic
@@ -113,13 +109,12 @@ function initFilters() {
   if (priceSort) priceSort.addEventListener("change", applyFilters);
 }
 
-// ✅ Apply filters (on same page)
+// ✅ Apply filters
 function applyFilters() {
   const category = document.getElementById("categoryFilter").value;
   const sortOrder = document.getElementById("priceSort").value;
 
   if (category === "all" && sortOrder === "") {
-    // ✅ Reset to default layout
     renderDefaultLayout(allProducts);
     return;
   }
@@ -179,11 +174,12 @@ function renderHorizontalScroll(products) {
     .join("");
 }
 
-// ✅ Attach events
-function attachCardEvents() {
-  document.querySelectorAll(".add-to-cart").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
+// ✅ Event Delegation for All Buttons
+function setupGlobalEventDelegation() {
+  document.body.addEventListener("click", (e) => {
+    if (e.target.classList.contains("add-to-cart")) {
+      e.preventDefault();
+      const btn = e.target;
       const product = {
         id: btn.dataset.id,
         name: decodeURIComponent(btn.dataset.name),
@@ -192,12 +188,11 @@ function attachCardEvents() {
       };
       addToCart(product);
       alert(`${product.name} added to cart!`);
-    });
-  });
+    }
 
-  document.querySelectorAll(".buy-now").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
+    if (e.target.classList.contains("buy-now")) {
+      e.preventDefault();
+      const btn = e.target;
       const id = btn.dataset.id;
       const name = btn.dataset.name;
       const price = btn.dataset.price;
@@ -205,7 +200,8 @@ function attachCardEvents() {
       const qty = 1;
 
       window.location.href = `checkout.html?buyNow=true&id=${id}&name=${name}&price=${price}&image=${image}&qty=${qty}`;
-    });
+    }
   });
 }
+
 export { renderHomePage };

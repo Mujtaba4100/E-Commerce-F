@@ -1,6 +1,7 @@
 // src/pages/order.js
 
-const backendURL = 'http://localhost:5000';
+//const backendURL = 'http://localhost:5000';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 const ordersContainer = document.getElementById('ordersContainer');
 const userId = localStorage.getItem('userId');
 const modal = document.getElementById('orderModal');

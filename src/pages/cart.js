@@ -1,4 +1,5 @@
-const backendURL = 'http://localhost:5000';
+//const backendURL = 'http://localhost:5000';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 // ✅ Utility: Get unique cart key per user
 function getCartKey() {

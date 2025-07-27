@@ -1,5 +1,6 @@
-const backendURL ='http://localhost:5000'
-//const backendURL = import.meta.env.VITE_BACKEND_URL;
+//const backendURL ='http://localhost:5000'
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 export async function registerUser(userData) {
   const res = await fetch(`${backendURL}/api/auth/register`, {
     method: 'POST',

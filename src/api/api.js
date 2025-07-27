@@ -1,5 +1,6 @@
-const BASE_URL = 'http://localhost:5000/api'; // Change this for production if needed
-
+//const BASE_URL = 'http://localhost:5000/api'; // Change this for production if needed
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL=`${backendURL}/api`
 // ==================== AUTH HELPERS ====================
 export function getToken() {
   return localStorage.getItem('token');

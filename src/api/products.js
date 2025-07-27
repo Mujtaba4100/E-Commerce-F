@@ -1,6 +1,6 @@
-const backendURL ='http://localhost:5000'
+//const backendURL ='http://localhost:5000'
 
-//const backendURL = import.meta.env.VITE_BACKEND_URL;
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 export async function fetchProducts() {
   try {
