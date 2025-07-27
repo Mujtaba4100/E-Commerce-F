@@ -1,7 +1,6 @@
-
-import { fetchProducts } from "../../dist/assets/api/products.js";
-import { createProductCard } from "../../dist/assets/components/productCard.js";
-import { addToCart } from "../../dist/assets/pages/cart.js";
+import { fetchProducts } from "../api/products.js";
+import { createProductCard } from "../components/productCard.js";
+import { addToCart } from "../pages/cart.js";
 
 let allProducts = []; // ✅ Store all products globally
 

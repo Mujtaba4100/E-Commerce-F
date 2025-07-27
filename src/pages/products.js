@@ -1,4 +1,4 @@
-import { fetchProducts } from "../../dist/assets/api/products.js";
+import { fetchProducts } from "../api/products.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
