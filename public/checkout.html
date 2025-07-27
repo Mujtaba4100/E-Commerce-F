@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - E-Commerce App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-800">Checkout</h1>
+    <a href="cart.html" class="text-blue-600 hover:underline">Back to Cart</a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+
+    <!-- Left: Shipping Form -->
+    <section class="md:col-span-2 bg-white rounded-xl shadow-md p-6">
+      <h2 class="text-xl font-bold mb-4">Shipping Details</h2>
+      <form id="checkout-form" class="space-y-4">
+        <input type="text" id="name" placeholder="Full Name" class="w-full border p-2 rounded" required>
+        <input type="email" id="email" placeholder="Email" class="w-full border p-2 rounded" required>
+        <input type="text" id="address" placeholder="Address" class="w-full border p-2 rounded" required>
+        <input type="text" id="city" placeholder="City" class="w-full border p-2 rounded" required>
+        <input type="text" id="zip" placeholder="Zip Code" class="w-full border p-2 rounded" required>
+        <input type="text" id="phone" placeholder="Phone Number" class="w-full border p-2 rounded" required>
+
+        <h3 class="text-lg font-semibold mt-4">Payment Method</h3>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2">
+            <input type="radio" name="payment" value="COD" checked>
+            Cash on Delivery
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="radio" name="payment" value="Card">
+            Credit/Debit Card
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <!-- Right: Order Summary -->
+    <section class="bg-white rounded-xl shadow-md p-6">
+      <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+      <div id="order-summary" class="space-y-4">
+        <!-- Cart Items go here -->
+      </div>
+      <hr class="my-4">
+      <div class="flex justify-between font-bold text-lg">
+        <span>Total:</span>
+        <span id="total-amount">Rs 0</span>
+      </div>
+      <button id="place-order" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg transition">
+        Place Order
+      </button>
+    </section>
+
+  </main>
+
+  <script type="module" src="src/pages/checkout.js"></script>
+</body>
+</html>
