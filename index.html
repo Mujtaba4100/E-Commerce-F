@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>E-Commerce App</title>
-    <link rel="stylesheet" href="src/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  </head>
-  <body class="bg-gray-50 font-sans">
-  <!-- Header -->
-  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-    <h1 class="text-2xl font-bold text-gray-800">E-Commerce Store</h1>
-    <input type="text" id="searchInput" placeholder="Search products..."
-      class="border border-gray-300 rounded-lg px-3 py-1 w-1/3">
-    <div class="flex items-center gap-4">
-      <!-- Auth Buttons -->
-      <div id="authButtons" class="flex gap-2">
-        <a href="/login.html" id="loginBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Login</a>
-        <a href="/register.html" id="registerBtn" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Register</a>
-      </div>
-      
-      <!-- Profile Buttons -->
-      <div id="profileButtons" class="hidden flex gap-3">
-        <button id="profileBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Profile</button>
-        <button id="logoutBtn" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Logout</button>
-        <button id="orderHistoryBtn" class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition">Orders</button>
-        <button id="cart-btn" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">🛒 Cart</button>
-      </div>
-    </div>
-  </header>
+<head>
+  <meta charset="UTF-8" />
+  <title>E-Commerce App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ Important for mobile -->
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
 
+<!-- ✅ Header -->
+<header class="bg-white shadow-md py-4 px-4 md:px-6 flex flex-col md:flex-row gap-3 md:gap-6 justify-between items-center sticky top-0 z-50">
+  <!-- Logo -->
+  <h1 id="siteLogo" class="text-xl md:text-2xl font-bold text-gray-800 cursor-pointer">E-Commerce Store</h1>
+
+  <!-- Search Bar -->
+  <input type="text" id="searchInput" placeholder="Search products..."
+    class="border border-gray-300 rounded-lg px-3 py-2 w-full md:w-1/3 text-sm md:text-base">
+
+  <!-- Buttons -->
+  <div class="flex items-center gap-2 md:gap-4">
+    <!-- Auth Buttons -->
+    <div id="authButtons" class="flex gap-2">
+      <a href="/login.html" id="loginBtn" class="px-3 md:px-4 py-2 bg-blue-500 text-white rounded-lg text-sm md:text-base hover:bg-blue-600 transition">Login</a>
+      <a href="/register.html" id="registerBtn" class="px-3 md:px-4 py-2 bg-green-500 text-white rounded-lg text-sm md:text-base hover:bg-green-600 transition">Register</a>
+    </div>
+    
+    <!-- Profile Buttons -->
+    <div id="profileButtons" class="hidden flex gap-2 md:gap-3 flex-wrap">
+      <button id="profileBtn" class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm md:text-base hover:bg-gray-300 transition">Profile</button>
+      <button id="logoutBtn" class="px-3 py-2 bg-red-500 text-white rounded-lg text-sm md:text-base hover:bg-red-600 transition">Logout</button>
+      <button id="orderHistoryBtn" class="px-3 py-2 bg-indigo-500 text-white rounded-lg text-sm md:text-base hover:bg-indigo-600 transition">Orders</button>
+      <button id="cart-btn" class="px-3 py-2 bg-yellow-500 text-white rounded-lg text-sm md:text-base hover:bg-yellow-600 transition">🛒 Cart</button>
+    </div>
+  </div>
+</header>
+
+<!-- ✅ Filter Section -->
 <div id="filter-container" class="max-w-7xl mx-auto px-4 mb-6"></div>
 
-
-
-  <!-- Main Content -->
-  <!-- ✅ Row 2: Image Slider -->
-  <section class="my-6 max-w-7xl mx-auto px-4">
-  <div class="swiper mySwiper rounded-xl overflow-hidden shadow-lg" style="height:250px;">
+<!-- ✅ Image Slider -->
+<section class="my-6 max-w-7xl mx-auto px-4">
+  <div class="swiper mySwiper rounded-xl overflow-hidden shadow-lg" style="height:200px; max-height:250px;">
     <div class="swiper-wrapper">
       <div class="swiper-slide cursor-pointer" data-category="Electronics">
         <img src="https://picsum.photos/800/400?random=21" class="w-full h-full object-cover">
@@ -50,51 +55,48 @@
       </div>
     </div>
     <div class="swiper-pagination"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next hidden md:block"></div> <!-- Hide arrows on small screens -->
+    <div class="swiper-button-prev hidden md:block"></div>
   </div>
 </section>
 
-
-<!-- ✅ Row 3 & 4: 6 Boxes (each has 4 products in a 2x2 grid) -->
-<section id="product-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-  <!-- JS will insert 6 boxes dynamically -->
+<!-- ✅ Product Grid -->
+<section id="product-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 p-4">
+  <!-- JS will insert products -->
 </section>
 
+<!-- ✅ Horizontal Scroll -->
+<section class="max-w-7xl mx-auto mt-6 p-4">
+  <h2 class="text-lg md:text-xl font-bold mb-3">Featured Products</h2>
+  <div id="scroll-products" class="flex gap-4 overflow-x-auto whitespace-nowrap pb-2 scrollbar-hide">
+    <!-- Products dynamically inserted -->
+  </div>
+</section>
 
-  <!-- ✅ Row 5: Horizontal Scroll -->
-  <section class="max-w-7xl mx-auto mt-6 p-4">
-    <h2 class="text-xl font-bold mb-3">Featured Products</h2>
-    <div id="scroll-products" class="flex gap-4 overflow-x-auto whitespace-nowrap pb-2">
-      <!-- Dynamic products -->
-    </div>
-  </section>
-
-  <!-- ✅ Row 6: Promo Section -->
+<!-- ✅ Promo Section -->
 <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 p-4 mt-10">
-  
   <!-- Big Promo -->
-  <div class="col-span-2 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 rounded-2xl shadow-lg h-56 flex items-center justify-between px-8 py-6 text-white relative overflow-hidden">
+  <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 rounded-2xl shadow-lg h-64 md:h-56 flex flex-col md:flex-row items-center justify-between px-6 md:px-8 py-6 text-white relative overflow-hidden">
     
-    <!-- Decorative Gradient Circles -->
-    <div class="absolute -top-8 -left-8 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+    <!-- Decorative Circles -->
+    <div class="absolute -top-8 -left-8 w-32 md:w-40 h-32 md:h-40 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-32 md:w-40 h-32 md:h-40 bg-white/10 rounded-full blur-3xl"></div>
 
-    <div class="relative z-10">
-      <h2 class="text-3xl font-extrabold mb-3 drop-shadow-lg">🔥 Mega Sale - Up to <span class="text-yellow-300">50% OFF!</span></h2>
-      <p class="mb-6 text-lg">Exclusive Deals on Premium Laptops</p>
+    <div class="relative z-10 text-center md:text-left mb-4 md:mb-0">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-3 drop-shadow-lg">🔥 Mega Sale - <span class="text-yellow-300">50% OFF!</span></h2>
+      <p class="mb-6 text-base md:text-lg">Exclusive Deals on Premium Laptops</p>
       <button id="shopNowBtn" data-category="Laptops" 
-        class="bg-white text-indigo-600 px-6 py-3 rounded-xl font-bold hover:bg-gray-200 shadow-lg transform hover:scale-105 transition duration-300">
+        class="bg-white text-indigo-600 px-5 md:px-6 py-2 md:py-3 rounded-xl font-bold hover:bg-gray-200 shadow-lg transform hover:scale-105 transition duration-300">
         Shop Now →
       </button>
     </div>
     
     <img src="https://picsum.photos/180/180?random=50" 
-         class="h-40 w-40 rounded-xl object-cover shadow-2xl transform hover:rotate-2 hover:scale-105 transition duration-500" />
+         class="h-32 w-32 md:h-40 md:w-40 rounded-xl object-cover shadow-2xl transform hover:rotate-2 hover:scale-105 transition duration-500" />
   </div>
 
-  <!-- Side Ad -->
-  <div class="bg-white rounded-2xl shadow-md h-56 flex flex-col items-center justify-center p-6 text-center border border-gray-200 hover:shadow-xl transition duration-300">
+  <!-- Side Promo -->
+  <div class="bg-white rounded-2xl shadow-md h-64 md:h-56 flex flex-col items-center justify-center p-6 text-center border border-gray-200 hover:shadow-xl transition duration-300">
     <img src="https://picsum.photos/120/120?random=60" 
          class="rounded-full mb-4 border-4 border-indigo-500 shadow-lg hover:scale-110 transition duration-300">
     <p class="text-lg font-bold text-gray-800 mb-1">Special Deal!</p>
@@ -103,20 +105,15 @@
        class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
        Shop Now
     </button>
-</div>
-
-
-
+  </div>
 </section>
 
-  <!-- ✅ Footer -->
-  <footer class="bg-gray-900 text-white text-center py-6 mt-8">
-    © 2025 MyShop. All rights reserved.
-  </footer>
+<!-- ✅ Footer -->
+<footer class="bg-gray-900 text-white text-center py-6 mt-8 text-sm md:text-base">
+  © 2025 MyShop. All rights reserved.
+</footer>
 
-
-  <!-- Script -->
-  <script type="module" src="/src/main.js"></script>
+<!-- ✅ Script -->
+<script type="module" src="/src/main.js"></script>
 </body>
-
 </html>
