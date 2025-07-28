@@ -11,7 +11,7 @@
   <!-- Header -->
   <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
     <h1 class="text-2xl font-bold text-gray-800">E-Commerce Store</h1>
-    <input type="text" placeholder="Search products..."
+    <input type="text" id="searchInput" placeholder="Search products..."
       class="border border-gray-300 rounded-lg px-3 py-1 w-1/3">
     <div class="flex items-center gap-4">
       <!-- Auth Buttons -->
@@ -99,11 +99,12 @@
          class="rounded-full mb-4 border-4 border-indigo-500 shadow-lg hover:scale-110 transition duration-300">
     <p class="text-lg font-bold text-gray-800 mb-1">Special Deal!</p>
     <p class="text-sm text-gray-500 mb-4">Buy 1 Get 1 Free</p>
-    <button id="specialDealBtn" 
+    <button id="specialDealBtn" data-category="Shoes"
        class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
        Shop Now
     </button>
 </div>
+
 
 
 </section>

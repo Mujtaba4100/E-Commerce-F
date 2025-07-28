@@ -2,11 +2,18 @@ import { fetchProducts } from "../api/products.js";
 import { createProductCard } from "../components/productCard.js";
 import { addToCart } from "../pages/cart.js";
 
-let allProducts = []; // ✅ Store all products globally
+let allProducts = [];
+const categories = [
+  "Phones", "Laptops", "Watches", "Accessories",
+  "Shoes", "Electronics", "Clothing", "Furniture",
+  "Books", "Toys", "Beauty", "Groceries"
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   renderHomePage();
-  setupGlobalEventDelegation(); // ✅ Attach single event listener for all buttons
+  setupGlobalEventDelegation();
+  initSearch();
+  initPromoButtons();
 });
 
 async function renderHomePage() {
@@ -30,18 +37,10 @@ function renderFilterUI() {
 
   filterContainer.innerHTML = `
     <div class="flex flex-wrap gap-3 justify-between items-center mb-6">
-      <!-- Category Filter -->
       <select id="categoryFilter" class="border border-gray-300 rounded-lg px-3 py-2">
         <option value="all">All Categories</option>
-        <option value="Phones">Phones</option>
-        <option value="Laptops">Laptops</option>
-        <option value="Watches">Watches</option>
-        <option value="Shoes">Shoes</option>
-        <option value="Books">Books</option>
-        <option value="Clothing">Clothing</option>
+        ${categories.map(c => `<option value="${c}">${c}</option>`).join("")}
       </select>
-
-      <!-- Price Sort -->
       <select id="priceSort" class="border border-gray-300 rounded-lg px-3 py-2">
         <option value="">Sort by Price</option>
         <option value="low-high">Low to High</option>
@@ -51,14 +50,12 @@ function renderFilterUI() {
   `;
 }
 
-// ✅ Default layout (6 category sections)
+// ✅ Default layout
 function renderDefaultLayout(products) {
   const grid = document.getElementById("product-grid");
   if (!grid) return;
 
-  const categories = ["Phones", "Laptops", "Watches", "Shoes", "Books", "Clothing"];
   let html = "";
-
   categories.forEach((category) => {
     const categoryProducts = products
       .filter((p) => p.category && p.category.toLowerCase() === category.toLowerCase())
@@ -68,6 +65,9 @@ function renderDefaultLayout(products) {
       <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-5 border border-gray-200">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-xl font-extrabold text-gray-800">${category}</h3>
+          <button class="shop-now text-blue-600 hover:underline font-semibold" data-category="${category}">
+            Shop Now →
+          </button>
         </div>
         <div class="grid grid-cols-2 gap-4">
           ${
@@ -100,7 +100,7 @@ function renderFilteredProducts(products) {
   `;
 }
 
-// ✅ Initialize filter logic
+// ✅ Filters
 function initFilters() {
   const categoryFilter = document.getElementById("categoryFilter");
   const priceSort = document.getElementById("priceSort");
@@ -109,7 +109,6 @@ function initFilters() {
   if (priceSort) priceSort.addEventListener("change", applyFilters);
 }
 
-// ✅ Apply filters
 function applyFilters() {
   const category = document.getElementById("categoryFilter").value;
   const sortOrder = document.getElementById("priceSort").value;
@@ -139,7 +138,8 @@ function applyFilters() {
 // ✅ Mini Product Card
 function createMiniProductCard(product) {
   return `
-    <div class="border rounded-xl p-3 text-center bg-gray-50 hover:bg-white hover:shadow-lg transition duration-300 cursor-pointer group">
+    <div class="mini-card border rounded-xl p-3 text-center bg-gray-50 hover:bg-white hover:shadow-lg transition duration-300 cursor-pointer group"
+         data-id="${product._id}">
       <div class="relative mb-3">
         <img src="${product.image}" alt="${product.name}" 
              class="w-24 h-24 object-cover mx-auto rounded-lg transform group-hover:scale-105 transition duration-300">
@@ -174,12 +174,33 @@ function renderHorizontalScroll(products) {
     .join("");
 }
 
-// ✅ Event Delegation for All Buttons
+// ✅ Event Delegation (Fixed)
 function setupGlobalEventDelegation() {
   document.body.addEventListener("click", (e) => {
-    if (e.target.classList.contains("add-to-cart")) {
+    const card = e.target.closest(".mini-card, .product-card");
+    const isAddToCart = e.target.closest(".add-to-cart");
+    const isBuyNow = e.target.closest(".buy-now");
+    const isShopNow = e.target.closest(".shop-now");
+
+    // ✅ Logo click → Go to Home Page
+    if (e.target.id === "siteLogo") {
+      window.location.href = "index.html";
+      return;
+    }
+
+    // ✅ Card click → Product details
+    if (card && !isAddToCart && !isBuyNow) {
+      const productId = card.dataset.id;
+      if (productId) {
+        window.location.href = `product.html?id=${productId}`;
+      }
+      return;
+    }
+
+    // ✅ Add to Cart
+    if (isAddToCart) {
       e.preventDefault();
-      const btn = e.target;
+      const btn = isAddToCart;
       const product = {
         id: btn.dataset.id,
         name: decodeURIComponent(btn.dataset.name),
@@ -188,11 +209,13 @@ function setupGlobalEventDelegation() {
       };
       addToCart(product);
       alert(`${product.name} added to cart!`);
+      return;
     }
 
-    if (e.target.classList.contains("buy-now")) {
+    // ✅ Buy Now
+    if (isBuyNow) {
       e.preventDefault();
-      const btn = e.target;
+      const btn = isBuyNow;
       const id = btn.dataset.id;
       const name = btn.dataset.name;
       const price = btn.dataset.price;
@@ -200,8 +223,111 @@ function setupGlobalEventDelegation() {
       const qty = 1;
 
       window.location.href = `checkout.html?buyNow=true&id=${id}&name=${name}&price=${price}&image=${image}&qty=${qty}`;
+      return;
+    }
+
+    // ✅ Shop Now
+    if (isShopNow) {
+      const category = isShopNow.dataset.category;
+      window.location.href = `products.html?category=${category}`;
     }
   });
+}
+
+// ✅ Search → Redirect with fuzzy match
+function initSearch() {
+  const searchInput = document.getElementById("searchInput");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) return;
+
+      let bestMatch = null;
+      let bestScore = Infinity;
+
+      categories.forEach(category => {
+        const score = levenshteinDistance(query, category.toLowerCase());
+        if (score < bestScore) {
+          bestScore = score;
+          bestMatch = category;
+        }
+      });
+
+      if (bestScore <= 2) {
+        window.location.href = `products.html?category=${bestMatch}`;
+      } else {
+        alert("No matching category found!");
+      }
+    }
+  });
+}
+
+// ✅ Levenshtein Distance
+function levenshteinDistance(a, b) {
+  const matrix = Array(a.length + 1).fill(null).map(() =>
+    Array(b.length + 1).fill(null)
+  );
+
+  for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+  for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return matrix[a.length][b.length];
+}
+
+// ✅ Promo Buttons
+function initPromoButtons() {
+  const shopNowBtn = document.getElementById("shopNowBtn");
+  const specialDealBtn = document.getElementById("specialDealBtn");
+
+  if (shopNowBtn) {
+    shopNowBtn.addEventListener("click", () => {
+      const category = shopNowBtn.dataset.category;
+      window.location.href = `products.html?category=${category}`;
+    });
+  }
+
+  if (specialDealBtn) {
+    specialDealBtn.addEventListener("click", async () => {
+      const category = specialDealBtn.dataset.category ? specialDealBtn.dataset.category.trim() : null;
+      if (!category) {
+        alert("Category not specified for this deal.");
+        return;
+      }
+
+      const products = allProducts
+        .filter(p => p.category && typeof p.category === "string" && p.category.toLowerCase() === category.toLowerCase())
+        .slice(0, 2);
+
+      if (products.length >= 2) {
+        const url = `checkout.html?buyNow=true` +
+          `&id1=${encodeURIComponent(products[0]._id)}` +
+          `&name1=${encodeURIComponent(products[0].name)}` +
+          `&price1=${products[0].price}` +
+          `&image1=${encodeURIComponent(products[0].image)}&qty1=1` +
+          `&id2=${encodeURIComponent(products[1]._id)}` +
+          `&name2=${encodeURIComponent(products[1].name)}` +
+          `&price2=${products[1].price}` +
+          `&image2=${encodeURIComponent(products[1].image)}&qty2=1`;
+
+        window.location.href = url;
+      } else {
+        alert("Not enough products for the deal!");
+      }
+    });
+  }
 }
 
 export { renderHomePage };

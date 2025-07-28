@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           quantity
         });
 
-        // ✅ Better than alert
         alert(`${quantity} x ${product.name} added to cart!`);
       });
     }
@@ -55,12 +54,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (container) {
       container.innerHTML = related.map(p => `
         <div class="bg-white p-3 rounded shadow w-48 cursor-pointer hover:shadow-lg transition"
-             onclick="window.location.href='/product.html?id=${p._id}'">
+             data-id="${p._id}">
           <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded mb-2">
           <p class="text-sm font-semibold truncate">${p.name}</p>
           <p class="text-green-600 font-bold">Rs ${p.price}</p>
         </div>
       `).join("");
+
+      // ✅ Click event for related products
+      container.querySelectorAll("div[data-id]").forEach(div => {
+        div.addEventListener("click", () => {
+          const id = div.getAttribute("data-id");
+          window.location.href = `/product.html?id=${id}`;
+        });
+      });
     }
 
   } catch (error) {
