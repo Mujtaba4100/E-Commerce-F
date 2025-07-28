@@ -8,46 +8,77 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 font-sans">
-  <!-- Header -->
-  <header class="bg-white shadow-md py-4 px-6">
-    <h1 class="text-2xl font-bold">Product Details</h1>
-  </header>
 
-  <!-- Main Section -->
-  <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-    <!-- Left: Image -->
-    <div>
-      <img id="product-image" src="" alt="Product Image" class="w-full rounded-lg shadow-md">
+<!-- ✅ Header -->
+<header class="bg-white shadow-md py-4 px-4 md:px-6 flex flex-col md:flex-row gap-3 md:gap-6 justify-between items-center sticky top-0 z-50">
+  <!-- Logo -->
+  <h1 id="siteLogo" class="text-xl md:text-2xl font-bold text-gray-800 cursor-pointer">E-Commerce Store</h1>
+
+  <!-- Search Bar -->
+  <input type="text" id="searchInput" placeholder="Search products..."
+    class="border border-gray-300 rounded-lg px-3 py-2 w-full md:w-1/3 text-sm md:text-base">
+
+  <!-- Buttons -->
+  <div class="flex items-center gap-2 md:gap-4 flex-wrap justify-center">
+    <!-- Auth Buttons -->
+    <div id="authButtons" class="flex gap-2">
+      <a href="./login.html" class="px-3 md:px-4 py-2 bg-blue-500 text-white rounded-lg text-sm md:text-base hover:bg-blue-600 transition">Login</a>
+      <a href="./register.html" class="px-3 md:px-4 py-2 bg-green-500 text-white rounded-lg text-sm md:text-base hover:bg-green-600 transition">Register</a>
+    </div>
+    
+    <!-- Profile Buttons -->
+    <div id="profileButtons" class="hidden flex gap-2 md:gap-3 flex-wrap">
+      <button class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm md:text-base hover:bg-gray-300 transition">Profile</button>
+      <button class="px-3 py-2 bg-red-500 text-white rounded-lg text-sm md:text-base hover:bg-red-600 transition">Logout</button>
+      <button class="px-3 py-2 bg-indigo-500 text-white rounded-lg text-sm md:text-base hover:bg-indigo-600 transition">Orders</button>
+      <button class="px-3 py-2 bg-yellow-500 text-white rounded-lg text-sm md:text-base hover:bg-yellow-600 transition">🛒 Cart</button>
+    </div>
+  </div>
+</header>
+
+<!-- ✅ Page Title -->
+<h1 class="text-3xl font-bold text-gray-800 text-center my-6">Product Details</h1>
+
+<!-- ✅ Main Product Details -->
+<main class="max-w-7xl mx-auto p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+  <!-- Left: Product Image -->
+  <div class="flex justify-center">
+    <img id="product-image" src="" alt="Product Image" class="w-full max-w-md rounded-xl shadow-lg object-cover">
+  </div>
+
+  <!-- Right: Product Info -->
+  <div class="space-y-4">
+    <h2 id="product-name" class="text-3xl font-bold text-gray-800"></h2>
+    <p id="product-category" class="text-gray-500 text-sm"></p>
+    <p id="product-price" class="text-2xl text-green-600 font-bold"></p>
+    <p id="product-stock" class="text-sm text-gray-500"></p>
+
+    <!-- Quantity + Add to Cart -->
+    <div class="flex gap-3 mt-4">
+      <input type="number" id="quantity" value="1" min="1" class="border p-2 w-20 rounded-lg text-center">
+      <button id="add-to-cart" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-lg font-semibold shadow-lg transition">
+        🛒 Add to Cart
+      </button>
     </div>
 
-    <!-- Right: Details -->
-    <div>
-      <h2 id="product-name" class="text-3xl font-bold text-gray-800"></h2>
-      <p id="product-category" class="text-gray-500"></p>
-      <p id="product-price" class="text-2xl text-green-600 font-bold mt-2"></p>
-      <p id="product-stock" class="text-sm text-gray-500 mt-1"></p>
+    <!-- Description -->
+    <p id="product-description" class="mt-6 text-gray-700 leading-relaxed"></p>
+  </div>
+</main>
 
-      <div class="mt-4 flex gap-2">
-        <input type="number" id="quantity" value="1" min="1" class="border p-2 w-16 rounded">
-        <button id="add-to-cart" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-          🛒 Add to Cart
-        </button>
-      </div>
+<!-- ✅ Related Products Section -->
+<section class="max-w-7xl mx-auto mt-8 p-4">
+  <h2 class="text-xl font-bold mb-4">Related Products</h2>
+  <div id="related-products" class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+    <!-- JS will inject related product cards -->
+  </div>
+</section>
 
-      <p id="product-description" class="mt-6 text-gray-700"></p>
-    </div>
-  </main>
+<!-- ✅ Footer -->
+<footer class="bg-gray-900 text-white text-center py-6 mt-8 text-sm md:text-base">
+  © 2025 MyShop. All rights reserved.
+</footer>
 
-  <!-- Related Products -->
-  <section class="max-w-7xl mx-auto mt-8 p-6">
-    <h2 class="text-xl font-bold mb-4">Related Products</h2>
-    <div id="related-products" class="flex gap-4 overflow-x-auto"></div>
-  </section>
-
-  <footer class="bg-gray-900 text-white text-center py-6 mt-8">
-    © 2025 MyShop. All rights reserved.
-  </footer>
-
-  <script type="module" src="./src/pages/productDetail.js"></script>
+<script type="module" src="./src/pages/productDetail.js"></script>
 </body>
 </html>

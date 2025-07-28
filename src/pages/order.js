@@ -1,13 +1,11 @@
-// src/pages/order.js
-
-//const backendURL = 'http://localhost:5000';
+import {initHeader} from '../components/header.js';
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 const ordersContainer = document.getElementById('ordersContainer');
 const userId = localStorage.getItem('userId');
 const modal = document.getElementById('orderModal');
 const modalContent = document.getElementById('modalContent');
 const closeModalBtn = document.getElementById('closeModal');
-
+initHeader()
 // ✅ Show message if user not logged in
 if (!userId) {
   ordersContainer.innerHTML = `

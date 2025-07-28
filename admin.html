@@ -3,46 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Panel</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../src/styles.css">
 </head>
 <body class="bg-gray-100 font-sans">
-  <!-- Top Navbar -->
-  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-    <h1 class="text-2xl font-bold text-gray-800">🛠️ Admin Panel</h1>
-    <div class="flex items-center gap-4">
-      <button id="profileBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium transition">Profile</button>
-      <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition">Logout</button>
+
+  <!-- ✅ Top Navbar -->
+  <header class="bg-white shadow-md py-4 px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 sticky top-0 z-50">
+    <h1 class="text-xl md:text-2xl font-bold text-gray-800">🛠️ Admin Panel</h1>
+    
+    <!-- Profile & Logout Buttons -->
+    <div class="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4">
+      <button id="profileBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 md:px-4 py-2 rounded-lg text-sm md:text-base font-medium transition">
+        Profile
+      </button>
+      <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 md:px-4 py-2 rounded-lg text-sm md:text-base font-medium transition">
+        Logout
+      </button>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <div class="bg-white shadow-lg rounded-2xl p-6">
-      <h2 class="text-xl font-semibold text-gray-800 mb-6">Quick Actions</h2>
+  <!-- ✅ Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div class="bg-white shadow-lg rounded-2xl p-4 md:p-6">
+      <h2 class="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">Quick Actions</h2>
 
-      <!-- Buttons Section -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <button id="add-product-btn" class="bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl shadow font-semibold transition transform hover:scale-105">
+      <!-- ✅ Buttons Section -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+        <button id="add-product-btn" class="bg-green-500 hover:bg-green-600 text-white py-2 md:py-3 rounded-xl shadow font-semibold text-sm md:text-base transition transform hover:scale-105">
           ➕ Add Product
         </button>
-        <button id="manage-products-btn" class="bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl shadow font-semibold transition transform hover:scale-105">
+        <button id="manage-products-btn" class="bg-blue-500 hover:bg-blue-600 text-white py-2 md:py-3 rounded-xl shadow font-semibold text-sm md:text-base transition transform hover:scale-105">
           📦 Manage Products
         </button>
-        <button id="manage-orders-btn" class="bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-xl shadow font-semibold transition transform hover:scale-105">
+        <button id="manage-orders-btn" class="bg-purple-500 hover:bg-purple-600 text-white py-2 md:py-3 rounded-xl shadow font-semibold text-sm md:text-base transition transform hover:scale-105">
           📋 Manage Orders
         </button>
-        <button id="manage-users-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl shadow font-semibold transition transform hover:scale-105">
+        <button id="manage-users-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 md:py-3 rounded-xl shadow font-semibold text-sm md:text-base transition transform hover:scale-105">
           👥 Manage Users
         </button>
       </div>
     </div>
 
-    <!-- Dynamic Content -->
-    <div id="adminContent" class="mt-8"></div>
+    <!-- ✅ Dynamic Content -->
+    <div id="adminContent" class="mt-6 md:mt-8"></div>
   </main>
 
   <script type="module" src="./src/admin.js"></script>
 </body>
-
 </html>

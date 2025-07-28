@@ -1,6 +1,8 @@
+import {initHeader} from '../components/header.js';
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 document.addEventListener("DOMContentLoaded", () => {
+  initHeader()
   const params = new URLSearchParams(window.location.search);
   const buyNow = params.get("buyNow");
   let items = [];

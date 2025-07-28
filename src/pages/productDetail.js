@@ -1,7 +1,9 @@
 import { fetchProducts } from "../api/products.js";
 import { addToCart } from "./cart.js";
+import {initHeader} from '../components/header.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
+  initHeader()
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
 
