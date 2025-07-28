@@ -10,14 +10,14 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        login: resolve(__dirname, 'public/login.html'),
-        cart: resolve(__dirname, 'public/cart.html'),
-        register: resolve(__dirname, 'public/register.html'),
-        order: resolve(__dirname, 'public/order.html'),
-        admin: resolve(__dirname, 'public/admin.html'),
-        checkout: resolve(__dirname, 'public/checkout.html'),
-        product: resolve(__dirname, 'public/product.html'),
-        products: resolve(__dirname, 'public/products.html')
+        login: resolve(__dirname, 'login.html'),
+        cart: resolve(__dirname, 'cart.html'),
+        register: resolve(__dirname, 'register.html'),
+        order: resolve(__dirname, 'order.html'),
+        admin: resolve(__dirname, 'admin.html'),
+        checkout: resolve(__dirname, 'checkout.html'),
+        product: resolve(__dirname, 'product.html'),
+        products: resolve(__dirname, 'products.html')
       }
     }
   }
