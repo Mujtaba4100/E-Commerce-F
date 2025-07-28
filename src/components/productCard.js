@@ -16,23 +16,23 @@ export function createProductCard(product) {
         <div class="flex items-center justify-between mt-2">
           <p class="text-lg sm:text-xl font-bold text-green-600">Rs ${product.price || "N/A"}</p>
         </div>
-        <!-- Buttons -->
-        <div class="flex gap-2 mt-3">
+        <!-- Vertical Buttons -->
+        <div class="flex flex-col gap-2 mt-4">
           <button 
-            class="add-to-cart flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 sm:py-2 rounded-lg text-xs sm:text-sm transition duration-200"
+            class="add-to-cart w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg text-sm transition duration-200 shadow-md"
             data-id="${product._id}"
             data-name="${encodeURIComponent(product.name)}"
             data-price="${product.price}">
-            🛒 Add
+            🛒 Add to Cart
           </button>
           
           <button 
-            class="buy-now flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-1 sm:py-2 rounded-lg text-xs sm:text-sm transition duration-200"
+            class="buy-now w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg text-sm transition duration-200 shadow-md"
             data-id="${product._id}"
             data-name="${encodeURIComponent(product.name)}"
             data-price="${product.price}"
             data-image="${encodeURIComponent(product.image)}">
-            Buy
+            ✅ Buy Now
           </button>
         </div>
       </div>
