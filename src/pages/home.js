@@ -62,14 +62,14 @@ function renderDefaultLayout(products) {
       .slice(0, 4);
 
     html += `
-      <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-5 border border-gray-200">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-extrabold text-gray-800">${category}</h3>
-          <button class="shop-now text-blue-600 hover:underline font-semibold" data-category="${category}">
+      <div class="bg-white rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-3 sm:p-4 md:p-5 border border-gray-200">
+        <div class="flex justify-between items-center mb-3 sm:mb-4">
+          <h3 class="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-800">${category}</h3>
+          <button class="shop-now text-blue-600 hover:underline font-semibold text-sm sm:text-base" data-category="${category}">
             Shop Now →
           </button>
         </div>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-2 sm:gap-4">
           ${
             categoryProducts.length > 0
               ? categoryProducts.map(createMiniProductCard).join("")
@@ -82,6 +82,7 @@ function renderDefaultLayout(products) {
 
   grid.innerHTML = html;
 }
+
 
 // ✅ Filtered layout
 function renderFilteredProducts(products) {
