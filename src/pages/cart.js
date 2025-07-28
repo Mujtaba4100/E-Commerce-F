@@ -1,5 +1,7 @@
 //const backendURL = 'http://localhost:5000';
+import {initHeader} from '../components/header.js';
 const backendURL = import.meta.env.VITE_BACKEND_URL;
+initHeader()
 
 // ✅ Utility: Get unique cart key per user
 function getCartKey() {
