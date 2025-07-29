@@ -10,28 +10,29 @@
 <body class="bg-gray-50 font-sans">
 
 <!-- ✅ Header -->
-<header class="bg-white shadow-md py-4 px-4 md:px-6 flex flex-col md:flex-row gap-3 md:gap-6 justify-between items-center sticky top-0 z-50">
+<header class="bg-white shadow-md py-3 px-4 md:px-6 flex flex-col sm:flex-row gap-3 md:gap-6 justify-between items-center sticky top-0 z-50">
+  
   <!-- Logo -->
-  <h1 id="siteLogo" class="text-xl md:text-2xl font-bold text-gray-800 cursor-pointer">E-Commerce Store</h1>
+  <h1 id="siteLogo" class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 cursor-pointer">E-Commerce Store</h1>
 
   <!-- Search Bar -->
   <input type="text" id="searchInput" placeholder="Search products..."
-    class="border border-gray-300 rounded-lg px-3 py-2 w-full md:w-1/3 text-sm md:text-base">
+    class="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 sm:py-2 w-full sm:w-1/3 text-sm md:text-base">
 
   <!-- Buttons -->
-  <div class="flex items-center gap-2 md:gap-4">
+  <div class="flex items-center gap-1 sm:gap-2 md:gap-3 overflow-x-auto flex-nowrap">
     <!-- Auth Buttons -->
-    <div id="authButtons" class="flex gap-2">
-      <a href="/login.html" class="px-3 md:px-4 py-2 bg-blue-500 text-white rounded-lg text-sm md:text-base hover:bg-blue-600 transition">Login</a>
-      <a href="/register.html" class="px-3 md:px-4 py-2 bg-green-500 text-white rounded-lg text-sm md:text-base hover:bg-green-600 transition">Register</a>
+    <div id="authButtons" class="flex gap-1 sm:gap-2">
+      <a href="/login.html" id="loginBtn" class="px-2 sm:px-3 md:px-4 py-1 sm:py-2 bg-blue-500 text-white rounded-lg text-xs sm:text-sm md:text-base hover:bg-blue-600 transition">Login</a>
+      <a href="/register.html" id="registerBtn" class="px-2 sm:px-3 md:px-4 py-1 sm:py-2 bg-green-500 text-white rounded-lg text-xs sm:text-sm md:text-base hover:bg-green-600 transition">Register</a>
     </div>
     
     <!-- Profile Buttons -->
-    <div id="profileButtons" class="hidden flex gap-2 md:gap-3 flex-wrap">
-      <button class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm md:text-base hover:bg-gray-300 transition">Profile</button>
-      <button class="px-3 py-2 bg-red-500 text-white rounded-lg text-sm md:text-base hover:bg-red-600 transition">Logout</button>
-      <button class="px-3 py-2 bg-indigo-500 text-white rounded-lg text-sm md:text-base hover:bg-indigo-600 transition">Orders</button>
-      <button class="px-3 py-2 bg-yellow-500 text-white rounded-lg text-sm md:text-base hover:bg-yellow-600 transition">🛒 Cart</button>
+    <div id="profileButtons" class="hidden flex gap-1 sm:gap-2 md:gap-3 flex-nowrap">
+      <button id="profileBtn" class="px-2 sm:px-3 py-1 sm:py-2 bg-gray-200 text-gray-700 rounded-lg text-xs sm:text-sm md:text-base hover:bg-gray-300 transition">Profile</button>
+      <button id="logoutBtn" class="px-2 sm:px-3 py-1 sm:py-2 bg-red-500 text-white rounded-lg text-xs sm:text-sm md:text-base hover:bg-red-600 transition">Logout</button>
+      <button id="orderHistoryBtn" class="px-2 sm:px-3 py-1 sm:py-2 bg-indigo-500 text-white rounded-lg text-xs sm:text-sm md:text-base hover:bg-indigo-600 transition">Orders</button>
+      <button id="cart-btn" class="px-2 sm:px-3 py-1 sm:py-2 bg-yellow-500 text-white rounded-lg text-xs sm:text-sm md:text-base hover:bg-yellow-600 transition">🛒</button>
     </div>
   </div>
 </header>
